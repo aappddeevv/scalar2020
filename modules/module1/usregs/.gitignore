@@ -1,0 +1,6 @@
+target
+out
+*.csv
+*.zip
+.dotty-ide*
+

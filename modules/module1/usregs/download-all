@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+mill usregs.run 2019 title-21
+amm ./src/sk.sc mda.xml

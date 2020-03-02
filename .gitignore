@@ -1,0 +1,6 @@
+bert-as-service
+zeromq
+uncased*
+.metals
+*.swp
+.ipynb_checkpoints
