@@ -15,29 +15,29 @@ val cs = java.nio.charset.StandardCharsets.UTF_8
 val base = "https://www.govinfo.gov/bulkdata"
 
 
-// Only publish 4 times a year so for today, grab 2019's version.
+// CFRs only published 4 times a year so for today, grab 2019's version.
 // Perhaps 2020 is available.
-@main def download_usregs(year: Int, entry_filter: String) =
+@main def download_usregs(year: Int, entry_filter: String, part_filter: scala.util.matching.Regex) =
   val target_file = s"CFR-$year.zip"
   val target_path = os.pwd / target_file
   val url = s"$base/CFR/$year/$target_file"
-  println(s"Downloading $url")
-
+  
   if !jnf.Files.exists(target_path.toNIO)
+    println(s"Downloading $url")
     os.write(target_path, requests.get.stream(url))
 
   Using.Manager { use =>
     val zfile = use(new ZipFile(target_path.toIO, cs))
     val ofile = use(new PrintWriter(jnf.Files.newBufferedWriter(output_reg_file.toNIO)))
     zfile.entries.asScala.foreach { entry =>
-      val epath = entry.getName
+      val zip_entry_path = entry.getName
       def run = parse(
-          epath,
+          zip_entry_path,
           new InputStreamReader(zfile.getInputStream(entry), cs),
           ofile
         )
-      if epath.contains(entry_filter) then
-        println(s"Processing $epath")
+      if zip_entry_path.contains(entry_filter) then
+        println(s"Processing $zip_entry_path")
         run
     }
   } match
@@ -64,8 +64,9 @@ def parse(src: String, in: Reader, out: PrintWriter): Unit =
   out.println("section,subject,content")
   (content \\ "SECTION").foreach { reg =>
     val index = (reg \ "SECTNO").text pipe clean_section
-    val subject = (reg \ "SUBJECT").text pipe clean_subject
-    val content = reg.child.filter(_.label == "P").map(_.text).mkString("\n") pipe clean
-    index.foreach(i => out.println(s"""${title}$i,"$subject","$content""""))
+     if index matches part_filter then
+      val subject = (reg \ "SUBJECT").text pipe clean_subject
+      val content = reg.child.filter(_.label == "P").map(_.text).mkString("\n") pipe clean
+      index.foreach(i => out.println(s"""${title}$i,"$subject","$content""""))    
   }
 

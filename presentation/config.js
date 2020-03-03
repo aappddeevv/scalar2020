@@ -2,7 +2,8 @@ const config = {
   gatsby: {
     pathPrefix: "/",
     siteUrl: "https://learn.hasura.io",
-    gaTrackingId: null
+    gaTrackingId: null,
+	trailingSlash: true,
   },
   header: {
     logo:
@@ -22,8 +23,12 @@ const config = {
     }
   },
   sidebar: {
-    forcedNavOrder: ["/index", "/introduction", "/codeblock"],
-    collapsedNav: ["/codeblock"],
+    forcedNavOrder:[
+	"/introduction/",
+	"/module1/",
+	"/module2",
+],
+	collapsedNav: [],
     links: [{ text: "Me", link: "https://lampshire.org" }],
     frontline: false,
     ignoreIndex: true

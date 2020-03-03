@@ -1,0 +1,3 @@
+# Search In General
+
+...pictures from bert-as-service blog on "smart searching" and generations...
