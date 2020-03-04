@@ -1,16 +1,16 @@
 const config = {
   gatsby: {
-    pathPrefix: "/",
-    siteUrl: "https://learn.hasura.io",
+    pathPrefix: "/scalar2020",
+    siteUrl: "https://aappddeevv.github.io",
     gaTrackingId: null,
 	trailingSlash: true,
   },
   header: {
     logo:
-      "https://graphql-engine-cdn.hasura.io/learn-hasura/assets/homepage/favicon.png",
-    logoLink: "https://learn.hasura.io",
+      "http://scalar-conf.com/images/scalar-logo.svg",
+    logoLink: "http://www.github.com/aappddeevv/scalar2020",
     title: "Scalar 2020 Fullstack Workshop",
-    githubUrl: "https://github.com/hasura/gatsby-gitbook-boilerplate",
+    githubUrl: "https://github.com/aappddeevv/scalar2020",
     helpUrl: "",
     tweetText: "",
     links: [{ text: "", link: "" }],
@@ -26,10 +26,11 @@ const config = {
     forcedNavOrder:[
 	"/introduction/",
 	"/module1/",
-	"/module2",
+	"/module2/",
+	"/codeblock/"
 ],
-	collapsedNav: [],
-    links: [{ text: "Me", link: "https://lampshire.org" }],
+	collapsedNav: ["/module1/","/module2/","/codeblock/","/introduction/"],
+    links: [{ text: "Me", link: "https://www.github.com/aappddeevv/scalar2020" }],
     frontline: false,
     ignoreIndex: true
   },

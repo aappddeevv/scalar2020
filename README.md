@@ -1,3 +1,2 @@
-Development repo for scalar 2020 talk.
+Repo for scalar 2020 "full stack" workshop.
 
-Flip to public repo when its more fully developed.

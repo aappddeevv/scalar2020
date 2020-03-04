@@ -56,3 +56,4 @@ Our workshop goal is to build a full stack that creates a customized search/anal
 
 Customizing the search/analysis space is the general idea behind of alot of interesting work these days and a significant part of the NLP space is about this concept.
 
+There is alot of talk about how AI is changing everything and that is true in certain areas. But there is still a long way to go. Dramatic improvements in "learning" are needed to make it more useful in areas where society can  benefit, e.g., healthcare, security and defense.

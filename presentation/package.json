@@ -57,9 +57,11 @@
   "scripts": {
     "start": "gatsby develop",
     "build": "gatsby build --prefix-paths"
+	,"deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "devDependencies": {
     "gatsby-plugin-remove-trailing-slashes": "^2.1.17",
+    "gh-pages": "^2.2.0",
     "prism-react-renderer": "^1.0.2"
   }
 }

@@ -1,4 +1,8 @@
-# Virtual Environments
+---
+title: "Virtual Environments"
+metaTitle: "Virtual Environments"
+metaDescription: "Virtual Environments"
+---
 
 There are many ways to create a virtual environment for development or production.
 They all have trade-offs and some play a dual role of creating a "shell" environment

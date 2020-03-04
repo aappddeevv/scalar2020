@@ -1,4 +1,6 @@
-# NLP
+---
+title: "NLP"
+---
 
 NLP is a fast moving field. New results are announced monthly. 2017-2018 was a year with many new discoveries that reshaped the field. While NLP goes back to the 1950s there are a few specific areas of NLP that are the focus today:
 
@@ -46,11 +48,10 @@ Most libraries are adding layers of abstraction in order to be able to retarget 
 
 ## Layers to make it easier to use the core: 
 
-- Keras: hides neural network details,
+- Keras: hides neural network details
+- Huggingface (pytorch) tranformers
+  - Make PT (mostly) and TF easier to use
 - https://github.com/ThilinaRajapakse/simpletransformers
-  - One linears in python
-- Huggingface (pytorch)
-  - Make PT and TF easier to use
 - Fast.ai (on top pytorch and now tf, adds to algorithms)
 - …  
 

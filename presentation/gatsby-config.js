@@ -18,6 +18,7 @@ const plugins = [
     options: {
       name: "docs",
       path: `${__dirname}/content/`
+	,ignore: ["**/\.*"]
     }
   },
   {
@@ -27,8 +28,11 @@ const plugins = [
         {
           resolve: "gatsby-remark-images",
           options: {
-            maxWidth: 1035,
-            sizeByPixelDensity: true
+            maxWidth: 1035
+            //sizeByPixelDensity: true
+	,linkImagesToOriginal: true
+	,disableBgImageOnAlpha: true
+	,quality: 80
           }
         },
         {

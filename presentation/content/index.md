@@ -1,8 +1,10 @@
 ---
 title: "Scala 2020 Workshop"
+metaTitle: "Scala 2020 Workshop"
+metaDescription: "Scala 2020 Workshop"
 ---
 
-# Hands-On Lab Objective:
+# Hands-On Lab Objective
 
 FULL STACK DEVELOPMENT LEVERAGING SCALA.JS, ML/NLP AND A MIXED CODEBASE
 

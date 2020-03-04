@@ -1,5 +1,5 @@
 ---
-title: Module 1
+title: "Module 1"
 metaTitle: "Module 1"
 metaDescription: "Module 1"
 ---

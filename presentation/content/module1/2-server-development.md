@@ -1,4 +1,8 @@
-# Server Development
+---
+title: "Server Development"
+metaTitle: "Server Development"
+metaDescription: "Server Development"
+---
 
 Let's use node express to develop the server. The server is based on node and javascript and is quite popular and has many add ons. Its not the fastest server but it is well proven and in a full stack world you may may not have the luxury of choosing all the parts of the technology stack that you want. The backend will have:
 
@@ -10,7 +14,7 @@ most of the effects.
 * sqllite: Backend database
 * connectors: Connectors to "downstream" services such as bert-as-service.
 
-## Development Setup
+# Development Setup
 
 We will use containers to develop the backend. We might use docker for a few different reasons including:
 
@@ -29,7 +33,7 @@ I will use visual studio code since that's a popular choice but I often use emac
 
 One note, while sbt, which we will use for scala development, is good at reproducing builds, we may still want to isolate out the jdk dependency. We may be using sdk on the host for jdk management but let's assume we want to lock down the jdk dependency as well.
 
-## Container Approach
+# Container Approach
 
 There are a few different ways to create a container, some of which lead to very slow development patterns. There are also different ways to use a container environment.
 
@@ -72,7 +76,7 @@ of the changes. However, in practice for development
 I found that I typically forget to push changes to my repo or save
 them.
 
-## Explore Dev Containers
+# Explore Dev Containers
 
 Lets install a dev image and create a container. You can review 
 images that you like at https://hub.docker.com and find a base
@@ -130,7 +134,7 @@ for the base that is used to build the platform level image as the base may
 cause restrictions to occur. For example, the alpine images do not use glibc
 so anything requiring glibc may have difficulty.
 
-## Create Dev Container Interactively
+# Create Dev Container Interactively
 
 We will use a base node container then add java to it. You can build a dev image 2 ways:
 
@@ -141,10 +145,10 @@ We will use a base node container then add java to it. You can build a dev image
 
 I always create it interactively and step by step write down instructions in a Dockerfile once I have it right.
 
-Here's the interactive version:
+Here's the interactive version. After the first command, the commands are executed in the container shell.
 
 ```sh
-$ docker run -it node:alpine
+$ docker run -it node:alpine sh
 
 # apk add --no-cache openjdk11 curl ncurses
 
@@ -158,7 +162,7 @@ $ docker run -it node:alpine
 
 Once created we stop and star the container (don't delete it!) and all the software stays installed. We could also run `docker commit <containerid>` to commit. You can `Ctrl-P Ctrl-Q` out of the shell to exit the container. If its still running you can always start a shell in the running container via `docker exec -it <containerid> sh`.
 
-## Create Dev Container Using Recipe
+# Create Dev Container Using Recipe
 
 Create a file `Dockerfile` which is based on YAML syntax:
 
@@ -179,5 +183,15 @@ ENV ENV="/etc/profile"
 CMD ["/bin/sh"]
 ```
 
-Run `docker build -t dev -f Dockerfile.dev` to build the image. Your image is listed as "dev" from running `docker images`. The use of `as builder` means that this layer can be referened by other layers if we extend Dockerfile. That will be important in later steps when a multi-stage build is helpful.
+Run `docker build -t dev -f Dockerfile` to build the image. Your image is listed as "dev" from running `docker images`. The use of `as builder` means that this layer can be referened by other layers if we extend Dockerfile. That will be important in later steps when a multi-stage build is more helpful.
+
+# Try It
+
+```sh
+cd modules/module1/10_containers
+
+docker build -t dev -f Dockerfile
+
+docker run -it --rm dev:latest
+```
 

@@ -1,4 +1,8 @@
-# Data
+---
+title: "Data"
+metaTitle: "Data"
+metaDescription: "Data"
+---
 
 We need to retrieve some data for our application. Since we are focused on NLP, lets grab some text. We will use text that is complex because many of the contrived datasets that are available always yield pretty good results. Non cultivated data yields less rosy results and presents real world challenges our application must overcome.
 
