@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-echo "US regs..."
-mill usregs.run 2019 title-21
-echo "SK regs..."
-amm ./src/sk.sc mda.xml
