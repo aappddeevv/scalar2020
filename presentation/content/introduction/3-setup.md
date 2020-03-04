@@ -36,7 +36,7 @@ unless you need to!
 
 # Workshop Git
 
-Grab the git repo at https://www.github.com/aappddeevv/scala2020.
+Grab the git repo at https://www.github.com/aappddeevv/scalar2020.
 
 ```sh
 cd <your work dir>

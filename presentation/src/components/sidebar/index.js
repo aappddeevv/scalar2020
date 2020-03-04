@@ -12,7 +12,7 @@ const forcedNavOrder = config.sidebar.forcedNavOrder;
 const ListItem = styled(({ className, active, level, ...props }) => {
   return (
     <li className={className}>
-      <a href={props.to} {...props} />
+      <a href={props.to} {...props} target="_blank"/>
     </li>
   );
 })`

@@ -2,16 +2,30 @@
 title: "NLP"
 ---
 
-NLP is a fast moving field. New results are announced monthly. 2017-2018 was a year with many new discoveries that reshaped the field. While NLP goes back to the 1950s there are a few specific areas of NLP that are the focus today:
+Natural Language Processing (NLP) is a fast moving subfeld in the general AI / Machine Learning field. 
 
-* Entailment: A statement in a document is true and therefore this statement is true.
-* ...
+New results are routinely announced quarterly. 2017-2018 announced new approaches that reshaped the field. 
+
+While NLP goes back to the 1950s there are a few specific areas of NLP that are the focus today and that are shaping the AI race.
 
 
 
 # AI / Machine Learning Libraries
 
-There is a wild growth of machine learning libraries in the world although over time, there is an expansion of new libraries, a consolidation then another expansion as new discoversie are integrated into mainstream libraries.
+There is wild growth of machine learning libraries today.
+
+The general pattern across 2-3 cycles of the AI field is that:
+
+1. New approaches shift the paradigm.
+2. New libraries appear everywhere all with subtle and large differences
+3. Libraries consolidate into a few main choices.
+4. Nuanced approaches develop, spawning new libraries or add-ons/plugins.
+5. Major discovery occurs.
+6. Cycle repeats.
+
+Very Thomas Kuhn'ish: https://plato.stanford.edu/entries/thomas-kuhn/
+
+We are between 2 and 3 after the last large NLP shift in 2017-2018 with the introduction of new neural network architectures and word representations (which happened around 2014).
 
 
 

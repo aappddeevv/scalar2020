@@ -3,7 +3,7 @@ const config = {
     pathPrefix: "/scalar2020",
     siteUrl: "https://aappddeevv.github.io",
     gaTrackingId: null,
-	trailingSlash: true,
+//	trailingSlash: true,
   },
   header: {
     logo:
@@ -24,13 +24,14 @@ const config = {
   },
   sidebar: {
     forcedNavOrder:[
-	"/introduction/",
-	"/module1/",
-	"/module2/",
-	"/codeblock/"
+	"/introduction",
+	"/module1",
+	"/module2",
+	"/codeblock"
 ],
-	collapsedNav: ["/module1/","/module2/","/codeblock/","/introduction/"],
-    links: [{ text: "Me", link: "https://www.github.com/aappddeevv/scalar2020" }],
+	collapsedNav: ["/module1","/module2","/codeblock","/introduction"],
+    links: [{ text: "Github", link: "https://www.github.com/aappddeevv/scalar2020" },
+	{text: "Scalar2020", link:"https://scalar-conf.com"}],
     frontline: false,
     ignoreIndex: true
   },
