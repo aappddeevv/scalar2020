@@ -4,4 +4,5 @@ metaTitle: "Module 2"
 metaDescription: "Module 2"
 ---
 
-Our focus now turns to machine learning.
+The focus is now on machine learning. We will need some containers running to perform our work.
+

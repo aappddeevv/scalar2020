@@ -24,7 +24,7 @@ Usually, data fetch is handled in a scripting language like python but any langu
 
 # Data Fetch
 
-We will use:
+We will use:
 
 * dotty: fetch US regs, filter, output CSV file
 * ammonite: process a provided South Korea regulatory XML file into a CSV file.
@@ -66,19 +66,48 @@ The fetch development files are located in `modules/module1/30_regs`.
 
 We will use the dev container for execution.
 
+If you have not already built the container:
+
 ```sh
-cd module/modules1/30_regs
+cd $TOP
 
-docker build -t dev -f ../10_containers/Dockerfile
+docker build -t dev -f module/module1/10_containers/Dockerfile
+```
 
+You should now have  an image built:
+
+```sh
+REPOSITORY                                                      TAG                  IMAGE ID       CREATED        SIZE
+localhost/dev                                                   latest               5428c06bb50f   1 minute ago   485 MB
+
+```
+
+Create a container:
+
+```sh
 # use this to run the first time it assumes the container is not already running
 docker run -v ./:/data --env-host --rm -it -w /data dev:latest
 
-# if using podman, need :z
+# if using podman on linux with selinux, need :z
 podman run -v ./:/data:z --env-host --rm -it /data dev:latest
 ```
 
-If you exit out of the shell the container will be destroyed and cannot be restarted, which is fine for this task.
+If you exit out of the shell the container will be destroyed (`--rm`) and cannot be restarted, which is fine for this task. If you accidently exit out, just restart the container like above. 
+
+You could also put the container into the background and reattach to it.
+
+```sh
+docker run -v ./:/data --env-host -it -w /data dev:latest
+
+// this bumps you out of the container back to the host command line
+^P^Q
+
+# reattach
+docker ps
+
+# find the container id (first 2-3 chars is enough) you want a container shell
+docker exec -it <container id> sh
+```
 
 You should be at a shell prompt ready for commands.
 
@@ -86,12 +115,21 @@ You should be at a shell prompt ready for commands.
 
 To cover the development of the fetch scripts, shift to the actual code in your checkout folder.
 
+For example, if you are using vscode:
+
+```sh
+cd $TOP/modules/module1/30_regs
+
+code .
+```
+
 After building and running per the README.md, let's check for updated data. It is possible that the CFR 2020 published version is available at this time. 
 
 In the container, try running
 
 ```sh
-$ mill usregs.run 2020 title-21
+# you should be at the container prompt created in the last step
+mill usregs.run 2020 title-21
 ```
 
 If its not available, you will see an exception thrown. For a script in the workshop, this is fine, but we were writing a real downloader, we would want to be more robust in the error handling. Generally, once you start adding alot of error handling to code, tools like python become more difficult to manage. We could use something like `zio` to manage the process and handle errors more robustly.
@@ -131,7 +169,7 @@ And apply the filter:
 
 ```scala
 - def parse(src: String, in: Reader, out: PrintWriter): Unit = 
-+ def parse(src: String, in: Reader, out: PrintWriter, ifilter: String=>Boolean): Unit = 
++ def parse(src: String, in: Reader, out: PrintWriter, sfilter: String=>Boolean): Unit = 
 
 -      index.foreach{ i =>
 -         val subject = (reg \ "SUBJECT").text pipe clean_subject
@@ -140,16 +178,17 @@ And apply the filter:
 -      }
 
 +      index.foreach{ i =>
-+ 	     if ifilter(i) then
++ 	     if sfilter(i) then
 +      	   val subject = (reg \ "SUBJECT").text pipe clean_subject
 +      	   val content = reg.child.filter(_.label == "P").map(_.text).mkString("\n") pipe clean
-+      	  out.println(s"""${title}$i,"$subject","$content"""")
++      	   out.println(s"""${title}$i,"$subject","$content"""")
 +      }}
 ```
 
 Now we can filter via:
 
 ```sh
-mill -w usregs.scala 2019 title-21 '8\\d\\d\\.'
+mill -w usregs2.scala 2019 title-21 '8\d{2}\.'
 ```
 
+This yields around 2K US regulations. `usregs2` was the 2nd target in mill's `build.sc` file.

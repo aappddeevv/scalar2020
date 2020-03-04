@@ -4,9 +4,7 @@ title: "NLP"
 
 Natural Language Processing (NLP) is a fast moving subfeld in the general AI / Machine Learning field. 
 
-New results are routinely announced quarterly. 2017-2018 announced new approaches that reshaped the field. 
-
-While NLP goes back to the 1950s there are a few specific areas of NLP that are the focus today and that are shaping the AI race.
+New results are routinely announced quarterly. 2017-2018 announced new approaches that reshaped the field.
 
 
 
@@ -36,7 +34,7 @@ The world is consolidating somewhat on PT and TF. TF seeks to provide a full sta
 - Pytorch (PT) 
 - Tensorflow (TF) 
 - SparkNLP
-- From snow labs, algorithms rewritten to run on spark 
+  - From snow labs, algorithms rewritten to run on spark 
 - Gensim (nlp focused) 
 - Deeplearning4j (jvm api but c/c++ engine)
 - Sklearn (scikit learn)
@@ -46,9 +44,9 @@ The world is consolidating somewhat on PT and TF. TF seeks to provide a full sta
 - Flux (julia)
 - ...on and on and in other languages such as R...
 
+A generation ago, almost all ML libs were written in c or c++...and they still are. However, parts of the libraries and some of the higher level APIs were then exposed in languages like python. That's been the dominant model for awhile now. But that is starting to change.
 
-
-Even the core libs are undergoing tremendous change. Tensorflow:
+Tensorflow, for example, is undergoing tremendous change right now even though TF2 was released recently:
 
 * Rewriting in swift so that one language is used for all layers.
 * Keep it easy to use in Python and other languages that other people use.
@@ -72,7 +70,7 @@ Most libraries are adding layers of abstraction in order to be able to retarget 
 ## Runtime environments:
 
 - Containers
-- Kubernetes e.g. Kubernetes and Kubeflow
+- Kubernetes e.g. Kubernetes with orchestration layers like Kubeflow
 - GPUs/TPUs
 - CPUS
 

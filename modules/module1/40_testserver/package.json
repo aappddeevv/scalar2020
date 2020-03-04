@@ -1,0 +1,30 @@
+{
+  "name": "appserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile-watch:dev": "tsc -w",
+    "monitor:dev": "nodemon -V -w package.json -w .env -w dist -w src/schema.graphql -w src/public --inspect --exec npm run dev",
+    "serve:dev": "node dist/server.js",
+    "compile-watch-monitor:dev": "run-p compile-watch:dev monitor:dev",
+    "copy-assets": "mkdir -p dist && cp -r ./src/public ./dist && cp ./src/schema.graphql ./dist",
+    "dev": "run-p copy-assets serve:dev",
+    "start": "run-s compile-watch-monitor:dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.3",
+    "@types/node": "^13.7.7",
+    "dotenv": "^8.2.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.8.1-rc"
+  },
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "graphql": "^14.6.0",
+    "nodemon": "^2.0.2"
+  }
+}

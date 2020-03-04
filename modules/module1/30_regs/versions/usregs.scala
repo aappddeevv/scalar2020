@@ -17,31 +17,38 @@ val base = "https://www.govinfo.gov/bulkdata"
 
 // CFRs only published 4 times a year so for today, grab 2019's version.
 // Perhaps 2020 is available.
-@main def download_usregs(year: Int, entry_filter: String, part_filter: scala.util.matching.Regex) =
+@main def download_usregs(year: Int, entry_filter: String, part_filter: String) =
   val target_file = s"CFR-$year.zip"
   val target_path = os.pwd / target_file
   val url = s"$base/CFR/$year/$target_file"
-  
+  val entry_r = matching.Regex(entry_filter)
+  val part_r = matching.Regex(part_filter)
+
   if !jnf.Files.exists(target_path.toNIO)
     println(s"Downloading $url")
     os.write(target_path, requests.get.stream(url))
 
+  println(s"Processing zip file $target_file")
   Using.Manager { use =>
     val zfile = use(new ZipFile(target_path.toIO, cs))
-    val ofile = use(new PrintWriter(jnf.Files.newBufferedWriter(output_reg_file.toNIO)))
+    val ofile = use(new PrintWriter(
+        jnf.Files.newBufferedWriter(output_reg_file.toNIO, jnf.StandardOpenOption.CREATE)))
+    ofile.println("section,subject,content")
     zfile.entries.asScala.foreach { entry =>
       val zip_entry_path = entry.getName
       def run = parse(
           zip_entry_path,
           new InputStreamReader(zfile.getInputStream(entry), cs),
-          ofile
+          ofile,
+          part_r.findFirstIn(_).isDefined
         )
-      if zip_entry_path.contains(entry_filter) then
-        println(s"Processing $zip_entry_path")
+      entry_r.findFirstIn(zip_entry_path).foreach{ _ =>
+        println(s"Processing ${target_file}:$zip_entry_path")
         run
+      }
     }
   } match
-    case Failure(_) => 1
+    case Failure(x) => println(s"Error ${x.getMessage}"); 1
     case _ => 0
 
 val bad = "\u00a7\u2009\u2014\u201c"
@@ -56,17 +63,15 @@ def title_from_doc(e: sx.Elem) =
     .headOption
     .flatMap(n => "\\d+".r.findFirstIn(n.text))
 
-def parse(src: String, in: Reader, out: PrintWriter): Unit = 
-  println(s"Processing $src")
+def parse(src: String, in: Reader, out: PrintWriter, sfilter: String=>Boolean): Unit = 
   val content = sx.XML.load(in)
   val title = title_from_doc(content).map(t => s"$t.").getOrElse("")
   // get all Section entries, these hold the regs
-  out.println("section,subject,content")
   (content \\ "SECTION").foreach { reg =>
     val index = (reg \ "SECTNO").text pipe clean_section
-     if index matches part_filter then
-      val subject = (reg \ "SUBJECT").text pipe clean_subject
-      val content = reg.child.filter(_.label == "P").map(_.text).mkString("\n") pipe clean
-      index.foreach(i => out.println(s"""${title}$i,"$subject","$content""""))    
-  }
-
+    index.foreach{ i =>
+      if sfilter(i) then
+        val subject = (reg \ "SUBJECT").text pipe clean_subject
+        val content = reg.child.filter(_.label == "P").map(_.text).mkString("\n") pipe clean
+        out.println(s"""${title}$i,"$subject","$content"""")
+    }}

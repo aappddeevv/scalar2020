@@ -94,6 +94,8 @@ You can look at and compare several images:
 You can pull the image then start it or pull it independently. Here's the pull.
 
 ```sh
+cd $TOP
+
 docker pull ubuntu:latest
 ```
 
@@ -188,9 +190,9 @@ Run `docker build -t dev -f Dockerfile` to build the image. Your image is listed
 # Try It
 
 ```sh
-cd modules/module1/10_containers
+cd $TOP/modules/module1/10_containers
 
-docker build -t dev -f Dockerfile
+docker build -t dev
 
 docker run -it --rm dev:latest
 ```

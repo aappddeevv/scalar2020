@@ -1,0 +1,9 @@
+type Query {
+  documents: [Document!]!
+}
+
+type Document {
+  id: ID!
+  subject: String
+  content: String
+}

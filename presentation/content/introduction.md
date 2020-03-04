@@ -25,7 +25,7 @@ Today, a full stack developer may "major" in one area but play roles in their "m
 - scala.js: A version of scala that outputs javascript instead of JVM bytecode.
 - zio: A scala effects framework. A bifunctor design and runtime management capabilities make this a popular choice. When running on the javascript platform, zio helps us manage asynchronous composition.
 - containers: A lightweight virtual environment that allows you to control dependencies and runtime behavior.
-- nodejs: A javascript based environment for running backend services, such as express, a nodejs http server framework.
+- nodejs: A javascript based environment for running backend services, such as express, a nodejs http server framework. The server will serve up graphql.
 - browser: Front-end UI. Chrome, firefox or safari are popular choices.
 - python: Popular programming language for machine learning processing.
 - BERT et al: NLP machine learning model that uses "transfer learning" to build a better NLP product.
@@ -41,12 +41,13 @@ There are a few pre-requisites that you need to run this workshop.
 - Ability to run a few containers.
   - You'll need a beefy laptop capable of running containers. You can run containers under windows, macos or linux on your laptop. You can also run containers in the cloud. How you run the containers during the workshop is up to you, but it will be assumed in the configuration and scripts that the containers are running locally.
   - You may choose not to run containers at all but you should only do this if you can completely control your laptop's configuration.
+- editor: e.g. vim, emacs, vscode, jetbrains, ...
+  - We will not assume that your chosen editor knows how to work with containers directly. We will run all container commands by CLI and be explicit about how different parts connect to each other.
+- git (so you can checkout the workshop repo)
 
 The ability to run a few containers generally means that you need a laptop with 16GB of memory and 30GB of free disk space.
 
 You can optionally run this all in the cloud even for this cloud. A AWS script is included to spin up an container focused ec2 instance. It would cost around $1.50 USD to use during this class but its up to you.
-
-
 
 
 
